@@ -7,7 +7,7 @@
 	background: linear-gradient(
 		180deg,
 		rgba(245, 233, 255, 0) 0%,
-		rgba(23, 37, 84, 1) 90%
+		rgba(23, 37, 84, 0.97) 90%
 	);
 	position: absolute;
 	top: 0;

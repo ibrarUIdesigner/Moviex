@@ -12,6 +12,9 @@ const MovieBanner = () => {
 		'https://stat5.bollywoodhungama.in/wp-content/uploads/2024/01/Shaitaan-1.jpg',
 	);
 
+	const fallBackImage =
+		'https://lh3.googleusercontent.com/proxy/O-mFZSyLgZwWUq_6sypcwahbrjdIr17SgePk5xoHG407Rxi3tdDrEaetLhuarvLAUBCHXGSxqc9TfDsMF6XlkWFwZxAHbcvdWcZXYzrzv66xYbC1MBWpzzMkq2bM';
+
 	useEffect(() => {
 		let randomNumber = Math.floor(Math.random() * 20) + 1;
 		const bg = url?.backdrop + data?.results[randomNumber]?.backdrop_path;
@@ -21,7 +24,13 @@ const MovieBanner = () => {
 	return (
 		<>
 			<div className='h-screen bg-blue-950 relative hero-banner'>
-				{!loading && <img src={background} alt='' />}
+				{!loading && (
+					<img
+						className='object-cover object-left-top'
+						src={background ?? fallBackImage}
+						alt=''
+					/>
+				)}
 
 				<div className='banner-content z-10 w-2/3 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center'>
 					<h3 className='text-[45px] text-white font-bold'>Welcome</h3>
