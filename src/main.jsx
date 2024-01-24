@@ -11,7 +11,7 @@ import { Details, PageNotFound } from './pages';
 
 const router = createBrowserRouter([
 	{ path: '/', element: <App /> },
-	{ path: '/details', element: <Details /> },
+	{ path: '/:mediaType/:id', element: <Details /> },
 	{ path: '*', element: <PageNotFound /> },
 ]);
 
