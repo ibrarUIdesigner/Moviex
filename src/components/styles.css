@@ -1,3 +1,6 @@
+.hero-banner {
+	overflow: hidden;
+}
 .hero-banner::after {
 	content: '';
 	background: rgb(245, 233, 255);
@@ -14,7 +17,7 @@
 	z-index: 1;
 }
 .banner-content h3 {
-	font-family: 'Bebas Neue', sans-serif;
+	font-family: 'Oswald', sans-serif;
 	text-transform: uppercase;
 }
 
@@ -30,4 +33,13 @@
 
 .search input {
 	outline: none;
+}
+
+.hero-banner > img {
+	width: 100%;
+	height: 100%;
+}
+
+.tab-bg-chnger {
+	transition: 0.4s all;
 }

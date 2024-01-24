@@ -1,5 +1,5 @@
 import React from 'react';
-import { MovieBanner } from '../components';
+import { ContentWrapper, MovieBanner, Upcoming } from '../components';
 import { useSelector } from 'react-redux';
 
 const Home = () => {
@@ -8,7 +8,9 @@ const Home = () => {
 	return (
 		<div>
 			<MovieBanner />
-			<h1>Home PAge us here.. {url.total_pages}</h1>
+			<ContentWrapper>
+				<Upcoming />
+			</ContentWrapper>
 		</div>
 	);
 };
