@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css';
+import useFetchData from '../hooks/useFetchData';
+import { useSelector } from 'react-redux';
 
 const MovieBanner = () => {
+	const { data } = useFetchData('movie/upcoming');
+	const { url } = useSelector((state) => state.home);
+
+	const [background, setBackground] = useState(
+		'https://stat5.bollywoodhungama.in/wp-content/uploads/2024/01/Shaitaan-1.jpg',
+	);
+
+	useEffect(() => {
+		let randomNumber = Math.floor(Math.random() * 20) + 1;
+		const bg = data?.results[randomNumber]?.backdrop_path;
+		setBackground(bg);
+	}, [data]);
+
 	return (
 		<div className='h-screen bg-blue-950 relative hero-banner'>
 			<img
 				className='h-[100%] w-[100%] object-cover object-left-top'
-				src='https://stat5.bollywoodhungama.in/wp-content/uploads/2024/01/Shaitaan-1.jpg'
+				src={url?.backdrop + background}
 				alt=''
 			/>
 

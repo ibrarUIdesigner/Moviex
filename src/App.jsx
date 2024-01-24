@@ -8,14 +8,19 @@ import { getAPIConfiguration } from './store/home.slice';
 function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		apiTest();
+		fetchAPIConfigs();
 	}, []);
-	const apiTest = async () => {
-		let res = await fetchDataFormAPI('movie/popular');
+	const fetchAPIConfigs = async () => {
+		let res = await fetchDataFormAPI('/configuration');
 
 		if (res) {
-			dispatch(getAPIConfiguration(res));
-			console.log(res);
+			let url = {
+				backdrop: res.images.secure_base_url + 'original',
+				poster: res.images.secure_base_url + 'original',
+				profile: res.images.secure_base_url + 'original',
+			};
+
+			dispatch(getAPIConfiguration(url));
 		}
 	};
 	return (
