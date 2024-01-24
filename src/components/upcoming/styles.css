@@ -1,0 +1,15 @@
+.movies-data {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	margin-bottom: 1rem;
+}
+.single-movie {
+	flex: auto;
+	min-width: 200px; /* Adjust as needed */
+	scroll-snap-align: start;
+}
+.movies-data::-webkit-scrollbar {
+	display: none;
+}

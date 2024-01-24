@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-useSelector;
+import './styles.css';
 
 const SingleMovieCard = ({ data }) => {
 	const [moviePoster, setMoviePoster] = useState('');
 	const { url } = useSelector((state) => state.home);
 
 	useEffect(() => {
-		console.log(url);
 		const poster = url?.poster + data.backdrop_path;
 		setMoviePoster(poster);
 	}, [url]);
 
 	return (
-		<div>
+		<div className='single-movie'>
 			<div className='movie-poster'>
 				<img
 					src={moviePoster}

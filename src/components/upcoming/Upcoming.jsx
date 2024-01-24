@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaBeer, FaCaretRight } from 'react-icons/fa';
+import { MdArrowCircleRight, MdArrowCircleLeft } from 'react-icons/md';
 import SwitchMovie from '../SwitchMovie';
 import useFetchData from '../../hooks/useFetchData';
 import SingleMovieCard from './SingleMovieCard';
+import './styles.css';
+import Skelton from '../Skelton';
 
 const Upcoming = () => {
 	const [endpoint, setEndpoint] = useState('day');
 	const { data, error, loading } = useFetchData(`/trending/all/${endpoint}`);
 
+	const sliderContianer = useRef();
+
 	//? SWITCH TABS
 	const onSwithTabChange = (tab, index) => {
 		setEndpoint(tab == 'Day' ? 'day' : 'week');
-		console.log(data);
+	};
+
+	//? SLIDER
+	const navigateSlider = (direction) => {
+		const container = sliderContianer.current;
+
+		const scrollAmount =
+			direction === 'left'
+				? container.scrollLeft - container.offsetWidth
+				: container.scrollLeft + container.offsetWidth;
+
+		container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
 	};
 
 	return (
@@ -30,12 +46,34 @@ const Upcoming = () => {
 					/>
 				</h3>
 			</div>
+			<div className='relative'>
+				<div className='movies-data gap-4 ' ref={sliderContianer}>
+					{data?.results.map((movie, index) => (
+						<SingleMovieCard data={movie} key={movie.id} />
+					))}
 
-			<div className='movies-data grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4'>
-				{data?.results.slice(0, 6).map((movie, index) => (
-					<SingleMovieCard data={movie} key={movie.id} />
-				))}
+					<div className='controllers flex items-center justify-between absolute top-1/2 left-0 w-[100%] p-4'>
+						<MdArrowCircleLeft
+							size={25}
+							className='text-purple-700'
+							onClick={() => navigateSlider('left')}
+						/>
+						<MdArrowCircleRight
+							size={25}
+							className='text-purple-700'
+							onClick={() => navigateSlider('right')}
+						/>
+					</div>
+				</div>
 			</div>
+
+			{loading && (
+				<div className='grid grid-cols-6 gap-4'>
+					{[...Array(6)].map((_, index) => (
+						<Skelton key={index} />
+					))}
+				</div>
+			)}
 		</div>
 	);
 };
