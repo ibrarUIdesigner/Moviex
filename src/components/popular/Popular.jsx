@@ -1,22 +1,23 @@
-import React, { useRef, useState } from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
 import { MdArrowCircleRight, MdArrowCircleLeft } from 'react-icons/md';
+import MoviesHeaderTitle from '../MoviesHeaderTitle';
 import SwitchMovie from '../SwitchMovie';
 import useFetchData from '../../hooks/useFetchData';
-import SingleMovieCard from './SingleMovieCard';
-import './styles.css';
 import Skelton from '../Skelton';
-import MoviesHeaderTitle from '../MoviesHeaderTitle';
+import { useSelector } from 'react-redux';
+import SingleMovieCard from '../upcoming/SingleMovieCard';
 
-const Upcoming = () => {
-	const [endpoint, setEndpoint] = useState('day');
-	const { data, error, loading } = useFetchData(`/trending/all/${endpoint}`);
+const Popular = () => {
+	const [endpoint, setEndpoint] = useState('movie');
+
+	const { url } = useSelector((state) => state.home);
+	const { data, error, loading } = useFetchData(`/${endpoint}/popular`);
 
 	const sliderContianer = useRef();
 
 	//? SWITCH TABS
 	const onSwithTabChange = (tab, index) => {
-		setEndpoint(tab == 'Day' ? 'day' : 'week');
+		setEndpoint(tab == 'Movies' ? 'movie' : 'tv');
 	};
 
 	//? SLIDER
@@ -31,17 +32,23 @@ const Upcoming = () => {
 		container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
 	};
 
+	useEffect(() => {
+		console.log(data);
+	}, [url, data]);
+
+	console.log(error);
+
 	return (
 		<div className='py-10'>
 			<div className='header mb-8 flex items-center justify-between'>
-				<MoviesHeaderTitle title={'upcoming'} />
+				<MoviesHeaderTitle title={'popular'} />
 				<SwitchMovie
 					onSwithTabChange={onSwithTabChange}
-					data={['Day', 'Week']}
+					data={['Movies', 'Tv Shows']}
 				/>
 			</div>
 
-			{loading ? (
+			{loading || error ? (
 				<div className='grid grid-cols-6 gap-4'>
 					{[...Array(6)].map((_, index) => (
 						<Skelton height={300} key={index} />
@@ -73,4 +80,4 @@ const Upcoming = () => {
 	);
 };
 
-export default Upcoming;
+export default Popular;

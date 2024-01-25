@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './styles.css';
+import dayjs from 'dayjs';
 
 const SingleMovieCard = ({ data }) => {
 	const [moviePoster, setMoviePoster] = useState('');
@@ -15,15 +16,17 @@ const SingleMovieCard = ({ data }) => {
 	}, [url]);
 
 	return (
-		<div className='single-movie'>
-			<div className='movie-poster'>
-				<img
-					src={moviePoster || fallBackImage}
-					alt=''
-					className='rounded-lg h-[300px] object-cover'
-				/>
+		<>
+			<div className='single-movie'>
+				<div className='movie-poster'>
+					<img
+						src={moviePoster || fallBackImage}
+						alt=''
+						className='rounded-lg h-[300px] object-cover'
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

@@ -7,7 +7,9 @@ const MoviesHeaderTitle = ({ title }) => {
 			<span className='w-6 h-8 flex items-center justify-center bg-purple-700  rounded-md'>
 				<FaCaretRight color='white' />
 			</span>
-			<strong className='text-white uppercase text-lg'>{title}</strong>
+			<strong className='text-white uppercase text-lg tracking-wider'>
+				{title}
+			</strong>
 		</div>
 	);
 };

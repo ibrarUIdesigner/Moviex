@@ -17,15 +17,13 @@ const SwitchMovie = ({ data, onSwithTabChange }) => {
 	};
 
 	return (
-		<div className='bg-white p-1 rounded-full'>
-			<div className='tab-item  flex items-center justify-between  relative'>
+		<div className='bg-indigo-950 rounded-full border border-slate-500'>
+			<div className='tab-item h-[40px]  flex items-center justify-between  relative'>
 				{data.map((tab, index) => (
 					<span
 						onClick={() => onTabChange(tab, index)}
 						key={index}
-						className={`${
-							selectedTab === index ? 'text-white' : 'text-slate-700'
-						}  p-1  rounded-full w-[100px] text-center cursor-pointer relative z-10`}
+						className={` text-xs text-white p-1  rounded-full w-[100px] text-center cursor-pointer relative z-10`}
 					>
 						{tab}
 					</span>
@@ -34,7 +32,7 @@ const SwitchMovie = ({ data, onSwithTabChange }) => {
 				<span
 					ref={changer}
 					style={{ left }}
-					className='tab-bg-chnger bg-purple-700 p-1 rounded-full w-[100px] absolute h-[32px] '
+					className=' h-[100%] tab-bg-chnger bg-gradient-to-r from-orange-400 to-red-500 p-1 rounded-full w-[100px] absolute  '
 				></span>
 			</div>
 		</div>

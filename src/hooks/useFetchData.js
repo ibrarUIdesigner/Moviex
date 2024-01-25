@@ -18,7 +18,7 @@ const useFetchData = (url) => {
 	const fetchData = async () => {
 		let result = await fetchDataFormAPI(url);
 
-		if (result) {
+		if (result && result.code !== 'ERR_BAD_REQUEST') {
 			setData(result);
 			setLoading(false);
 			setError(null);

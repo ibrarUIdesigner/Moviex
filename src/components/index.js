@@ -4,6 +4,7 @@ import Image from './Image';
 import MovieBanner from './MovieBanner';
 import Skelton from './Skelton';
 import SwitchMovie from './SwitchMovie';
+import MostViewed from './most-viewed/MostViewed';
 import SingleMovieCard from './upcoming/SingleMovieCard';
 import Upcoming from './upcoming/Upcoming';
 
@@ -16,4 +17,5 @@ export {
 	SwitchMovie,
 	SingleMovieCard,
 	Skelton,
+	MostViewed,
 };
