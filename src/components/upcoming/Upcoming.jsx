@@ -51,7 +51,11 @@ const Upcoming = () => {
 				<div className='relative'>
 					<div className='movies-data gap-4 ' ref={sliderContianer}>
 						{data?.results.map((movie, index) => (
-							<SingleMovieCard data={movie} key={movie.id} />
+							<SingleMovieCard
+								data={movie}
+								key={movie.id}
+								mediaType={'movie'}
+							/>
 						))}
 
 						<div className='controllers flex items-center justify-between absolute top-1/2 left-0 w-[100%] p-4'>

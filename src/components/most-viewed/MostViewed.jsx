@@ -5,12 +5,14 @@ import Skelton from '../Skelton';
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import SwitchMovie from '../SwitchMovie';
+import { useNavigate } from 'react-router-dom';
 
 const MostViewed = () => {
 	const [endpoint, setEndpoint] = useState('movie');
 	const { data, error, loading } = useFetchData(`${endpoint}/top_rated`);
 	const [randomMedia, setRandomMedia] = useState(0);
 	const { url } = useSelector((state) => state.home);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		let randomNumber = Math.floor(Math.random() * data?.results.length + 1);
@@ -25,6 +27,14 @@ const MostViewed = () => {
 
 	const onSwithTabChange = (tab, index) => {
 		setEndpoint(tab == 'Movies' ? 'movie' : 'tv');
+	};
+
+	//? OPEN DETIALS PAGE
+	const onDetailsPage = (endpoint, id) => {
+		console.log(id, endpoint);
+		setTimeout(() => {
+			navigate(`${endpoint}/${id}`);
+		}, 2000);
 	};
 	return (
 		<div className='py-10'>
@@ -43,7 +53,12 @@ const MostViewed = () => {
 						</>
 					) : (
 						data?.results[randomMedia] && (
-							<div className='h-[400px]  rounded-lg overflow-hidden relative'>
+							<div
+								onClick={() =>
+									onDetailsPage(endpoint, data?.results[randomMedia].id)
+								}
+								className='h-[400px]  rounded-lg overflow-hidden relative cursor-pointer'
+							>
 								<img
 									className='h-[100%] w-[100%] object-cover'
 									src={url?.backdrop + data?.results[randomMedia].backdrop_path}
@@ -99,8 +114,9 @@ const MostViewed = () => {
 						<>
 							{data?.results.slice(0, 3).map((movie, index) => (
 								<div
+									onClick={() => onDetailsPage(endpoint, movie.id)}
 									key={index}
-									className='flex shadow-lg items-center justify-between h-[120px] bg-gray-900 rounded-md overflow-hidden p-1'
+									className='flex cursor-pointer shadow-lg items-center justify-between h-[120px] bg-gray-900 rounded-md overflow-hidden p-1'
 								>
 									<div className='media-content  px-4  flex-1 items-center gap-4'>
 										<div>
